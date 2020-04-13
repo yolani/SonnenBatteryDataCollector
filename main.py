@@ -54,7 +54,7 @@ if __name__ == "__main__":
       db_conn.commit()
     
     if csv_fp:
-      fp.write("Bla")
+      csv_fp.write("Bla")
     if not db_conn and not csv_fp:
       print(data) 
     time.sleep(config.SAMPLE_TIME)
