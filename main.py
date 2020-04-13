@@ -27,7 +27,7 @@ if __name__ == "__main__":
   try:
     db_conn = psycopg2.connect("dbname='%s' user='%s' host='192.168.1.123' password='%s'" % (config.DB_NAME, config.DB_USER, config.DB_HOST, config.DB_PWD))
   except:
-    loggin.warning("Unable to connect to the database")
+    logging.warning("Unable to connect to the database")
 
   csv_fp = None
   try:
