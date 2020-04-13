@@ -1,0 +1,4 @@
+requests
+numpy
+pytz
+psycopg2-binary
