@@ -39,10 +39,12 @@ class BatteryData():
       "dischargeNotAllowed":false,
       "generator_autostart":false}
     '''
-    self.__timestamp = datetime.datetime.strptime(json_data["Timestamp"], "%Y-%m-%d %H:%M:%S")
-    self.__timestamp = pytz.timezone('Europe/Paris').localize(self.__timestamp)
-    self.__timestamp = self.__timestamp.astimezone(pytz.utc)
-    self.__timestamp = datetime.datetime.timestamp(self.__timestamp)
+    # self.__timestamp = datetime.datetime.strptime(json_data["Timestamp"], "%Y-%m-%d %H:%M:%S")
+    # self.__timestamp = pytz.timezone('Europe/Paris').localize(self.__timestamp)
+    # self.__timestamp = self.__timestamp.astimezone(pytz.utc)
+    # self.__timestamp = datetime.datetime.timestamp(self.__timestamp)
+
+    self.__timestamp = datetime.datetime.timestamp(datetime.datetime.strptime(json_data["Timestamp"], "%Y-%m-%d %H:%M:%S"))
 
     self.__production = int(json_data["Production_W"])
     self.__consumption = int(json_data["Consumption_W"])
