@@ -32,6 +32,7 @@ if __name__ == "__main__":
   csv_fp = None
   try:
     csv_fp = open(config.CSV_FILE, "w+")
+    csv_fp.write("production_w, consumption_w, grid_feed_in_w, grid_retrieve_w, battery_level, battery_charge_w, battery_discharge_w, consumption_ws, production_ws, grid_feed_in_ws, grid_retrieve_ws, battery_charge_ws, battery_discharge_ws\n")
   except:
     logging.warning("Unable to open %s." % config.CSV_FILE)
 
@@ -54,7 +55,7 @@ if __name__ == "__main__":
       db_conn.commit()
     
     if csv_fp:
-      csv_fp.writeline("%s,%i,%i,%i,%i,%i,%i,%i,%f,%f,%f,%f,%f,%f" % 
+      csv_fp.write("%s,%i,%i,%i,%i,%i,%i,%i,%f,%f,%f,%f,%f,%f\n" % 
                             (data.get_timestamp(),            data.get_production_w(),        data.get_consumption_w(), 
 			     data.get_grid_feed_in_w(),       data.get_grid_retrieve_w(),     data.get_battery_level(),
 			     data.get_battery_charge_w(),     data.get_battery_discharge_w(), data.get_energy_consumption_ws(),
