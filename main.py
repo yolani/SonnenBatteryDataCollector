@@ -41,9 +41,9 @@ if __name__ == "__main__":
     data = sonnen_batterie.get_last_valid_data()
     if db_conn:
       db_conn.cursor().execute("INSERT INTO measurements( \
-	                          'timestamp':::timestamptz, production_w, consumption_w, grid_feed_in_w, grid_retrieve_w, battery_level, \                            battery_charge_w, battery_discharge_w, consumption_ws, production_ws, grid_feed_in_ws, \
+	                          \"timestamp\", production_w, consumption_w, grid_feed_in_w, grid_retrieve_w, battery_level, \                            battery_charge_w, battery_discharge_w, consumption_ws, production_ws, grid_feed_in_ws, \
                             grid_retrieve_ws, battery_charge_ws, battery_discharge_ws) \
-	                          VALUES (%s, %i, %i, %i, %i, %i, %i, %i, %f, %f, %f, %f, %f, %f);" % 
+	                          VALUES ('%s'::timestamptz, %i, %i, %i, %i, %i, %i, %i, %f, %f, %f, %f, %f, %f);" % 
                             (data.get_timestamp(),
                              data.get_production_w(), data.get_consumption_w(), data.get_grid_feed_in_w(),
                              data.get_grid_retrieve_w(), data.get_battery_level(), data.get_battery_charge_w(),
