@@ -44,7 +44,7 @@ if __name__ == "__main__":
 	                          production_w, consumption_w, grid_feed_in_w, grid_retrieve_w, battery_level, \
 				  battery_charge_w, battery_discharge_w, consumption_ws, production_ws, grid_feed_in_ws, \
                                   grid_retrieve_ws, battery_charge_ws, battery_discharge_ws) \
-	                          VALUES (%s, %i, %i, %i, %i, %i, %i, %i, %f, %f, %f, %f, %f, %f);" % 
+	                          VALUES (%i, %i, %i, %i, %i, %i, %i, %f, %f, %f, %f, %f, %f);" % 
                             (data.get_production_w(),        data.get_consumption_w(), 
 			     data.get_grid_feed_in_w(),       data.get_grid_retrieve_w(),     data.get_battery_level(),
 			     data.get_battery_charge_w(),     data.get_battery_discharge_w(), data.get_energy_consumption_ws(),
