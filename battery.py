@@ -42,7 +42,7 @@ class BatteryData():
     '''
     
     # create real timestamp from battery info and add timezone information for correct representation later on
-    self.__timestamp = tzlocal.get_localzone().localize(datetime.datetime.timestamp(datetime.datetime.strptime(json_data["Timestamp"], "%Y-%m-%d %H:%M:%S")))
+    self.__timestamp = tzlocal.get_localzone().localize(datetime.datetime.strptime(json_data["Timestamp"], "%Y-%m-%d %H:%M:%S"))
     # self.__timestamp = datetime.datetime.timestamp(datetime.datetime.strptime(json_data["Timestamp"], "%Y-%m-%d %H:%M:%S"))
 
     self.__production = int(json_data["Production_W"])
