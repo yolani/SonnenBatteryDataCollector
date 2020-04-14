@@ -115,11 +115,10 @@ class BatteryData():
     return self.__energy_discharge
 
 class Battery():
-  def __init__(self, ip_addr, store_fcts=None):
+  def __init__(self, ip_addr):
     self.__battery_ip = ip_addr
     self.__current_data = None
     self.__last_valid_data = None
-    self.__output_fcts = store_fcts
 
   def update_data(self):
     response = requests.get('http://%s/api/v1/status' % self.__battery_ip)
