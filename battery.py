@@ -5,6 +5,7 @@ import numpy
 import pytz
 import requests
 import time
+import tzlocals
 
 class BatteryData():
   def __init__(self, json_data, last_data=None):
@@ -39,12 +40,9 @@ class BatteryData():
       "dischargeNotAllowed":false,
       "generator_autostart":false}
     '''
-    # self.__timestamp = datetime.datetime.strptime(json_data["Timestamp"], "%Y-%m-%d %H:%M:%S")
-    # self.__timestamp = pytz.timezone('Europe/Paris').localize(self.__timestamp)
-    # self.__timestamp = self.__timestamp.astimezone(pytz.utc)
-    # self.__timestamp = datetime.datetime.timestamp(self.__timestamp)
-
-    self.__timestamp = datetime.datetime.timestamp(datetime.datetime.strptime(json_data["Timestamp"], "%Y-%m-%d %H:%M:%S"))
+    
+    # create real timestamp from battery info and add timezone information for correct representation later on
+    self.__timestamp = get_localzone().localize(datetime.datetime.timestamp(datetime.datetime.strptime(json_data["Timestamp"], "%Y-%m-%d %H:%M:%S")))
 
     self.__production = int(json_data["Production_W"])
     self.__consumption = int(json_data["Consumption_W"])
