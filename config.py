@@ -1,6 +1,6 @@
 import os
 
-SAMPLE_TIME=os.getenv("SAMPLE_TIME", default = 30) # sample time in seconds to retrieve data from battery
+SAMPLE_TIME=int(os.getenv("SAMPLE_TIME", default = 30)) # sample time in seconds to retrieve data from battery
 
 BATTERY_IP=os.getenv("BATTERY_IP", default = "192.168.1.1")
 
