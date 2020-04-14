@@ -21,7 +21,7 @@ if __name__ == "__main__":
 
   signal.signal(signal.SIGINT, signal_handler)
 
-  sonnen_batterie = Battery("192.168.1.106", store_fcts=[print, ])  
+  sonnen_batterie = Battery(config.BATTERY_IP)  
 
   db_conn = None
   try:
