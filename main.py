@@ -54,7 +54,7 @@ if __name__ == "__main__":
       db_conn.commit()
     
     if csv_fp:
-      csv_fp.write("%s,%i,%i,%i,%i,%i,%i,%i,%f,%f,%f,%f,%f,%f" % 
+      csv_fp.writeline("%s,%i,%i,%i,%i,%i,%i,%i,%f,%f,%f,%f,%f,%f" % 
                             (data.get_timestamp(),            data.get_production_w(),        data.get_consumption_w(), 
 			     data.get_grid_feed_in_w(),       data.get_grid_retrieve_w(),     data.get_battery_level(),
 			     data.get_battery_charge_w(),     data.get_battery_discharge_w(), data.get_energy_consumption_ws(),
