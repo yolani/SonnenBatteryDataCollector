@@ -54,9 +54,15 @@ if __name__ == "__main__":
       db_conn.commit()
     
     if csv_fp:
-      csv_fp.write("Bla")
+      csv_fp.write("%s,%i,%i,%i,%i,%i,%i,%i,%f,%f,%f,%f,%f,%f" % 
+                            (psycopg2.TimestampFromTicks(data.get_timestamp()),            data.get_production_w(),        data.get_consumption_w(), 
+			     data.get_grid_feed_in_w(),       data.get_grid_retrieve_w(),     data.get_battery_level(),
+			     data.get_battery_charge_w(),     data.get_battery_discharge_w(), data.get_energy_consumption_ws(),
+			     data.get_energy_production_ws(), data.get_energy_feed_in_ws(),   data.get_energy_retrieved_ws(),
+                             data.get_battery_charge_ws(), data.get_battery_discharge_ws()))
+		   
     if not db_conn and not csv_fp:
-      print(data) 
+      logging.debug(data) 
     time.sleep(config.SAMPLE_TIME)
   
   
