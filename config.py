@@ -1,11 +1,12 @@
-SAMPLE_TIME=30 # sample time in seconds to retrieve data from battery
+import os
 
-BATTERY_IP="192.168.1.1"
+SAMPLE_TIME=os.getenv("SAMPLE_TIME", default = 30) # sample time in seconds to retrieve data from battery
 
-DB_HOST="postgres"
-DB_NAME="pv"
-DB_USER="pv_user"
-DB_PWD="pv_password"
+BATTERY_IP=os.getenv("BATTERY_IP", default = "192.168.1.1")
 
-CSV_FILE="data.csv"
+DB_HOST=os.getenv("DB_HOST", default = "postgres")
+DB_NAME=os.getenv("DB_NAME", default = "pv")
+DB_USER=os.getenv("DB_USER", default = "user")
+DB_PWD=os.getenv("DB_PWD", default = "password")
 
+CSV_FILE=os.getenv("CSV_FILE", default = "data.csv")
