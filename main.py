@@ -45,7 +45,9 @@ if __name__ == "__main__":
     if db_conn:
       # check connection by executing a simple query
       try:
-        db_conn.cursor().execute("SELECT version();").fetchone()
+        cursor = db_conn.cursor()
+	cursor.execute('SELECT VERSION()')
+	row = cursor.fetchone()
       except Exception as ex:
         logging.error("%s" % repr(ex))	
         logging.error("Connection to database seems to be broken! re-connectiong...!")
