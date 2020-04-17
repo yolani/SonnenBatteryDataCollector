@@ -46,7 +46,8 @@ if __name__ == "__main__":
       # check connection by executing a simple query
       try:
         db_conn.cursor().execute("SELECT version();").fetchone()
-      except:
+      except Exception as ex:
+        logging.error("%s" % repr(ex))	
         logging.error("Connection to database seems to be broken! re-connectiong...!")
         db_conn = psycopg2.connect("dbname='%s' user='%s' host='%s' password='%s'" % (config.DB_NAME, config.DB_USER, config.DB_HOST, config.DB_PWD))
         logging.info("Successfully connected to PostgreSQL database %s@%s!" % (config.DB_NAME, config.DB_HOST))
