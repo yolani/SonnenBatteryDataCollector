@@ -43,14 +43,11 @@ if __name__ == "__main__":
     sonnen_batterie.update_data()
     data = sonnen_batterie.get_last_valid_data()
     if db_conn:
-      status = db_conn.get_transaction_status()
-      if status in [psycopg2.extensions.TRANSACTION_STATUS_UNKNOWN, psycopg2.extensions.TRANSACTION_STATUS_IDLE] or conn.closed:
-        # server connection lost or in error state
-        logging.warning("Lost connection to PostgreSQL database %s@%s! Re-connecting..." % (config.DB_NAME, config.DB_HOST))
-        try:
-          db_conn.close()
-        except:
-          pass      
+      # check connection by executing a simple query
+      try:
+        db_conn.cursor().execute("SELECT version();").fetchone()
+      except:
+        logging.error("Connection to database seems to be broken! re-connectiong...!")
         db_conn = psycopg2.connect("dbname='%s' user='%s' host='%s' password='%s'" % (config.DB_NAME, config.DB_USER, config.DB_HOST, config.DB_PWD))
         logging.info("Successfully connected to PostgreSQL database %s@%s!" % (config.DB_NAME, config.DB_HOST))
       db_conn.cursor().execute("INSERT INTO measurements( \
