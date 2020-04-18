@@ -18,6 +18,7 @@ CREATE TABLE public.measurements
     battery_charge_ws double precision,
     battery_discharge_ws double precision,
     "timestamp" timestamp with time zone NOT NULL DEFAULT now(),
+    battery_id text,
     CONSTRAINT measurements_pkey PRIMARY KEY ("timestamp")
 )
 

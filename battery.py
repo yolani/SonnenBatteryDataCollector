@@ -119,13 +119,29 @@ class Battery():
     self.__battery_ip = ip_addr
     self.__current_data = None
     self.__last_valid_data = None
+    self.__battery_id = 1337
+
+    self.get_configuration()
+
+  def get_configuration(self):
+    response = requests.get('http://%s:8080/api/configuration' % self.__battery_ip)
+    if response.status_code == 200:
+      conf = json.loads(response.text)
+      self.__battery_id = conf["DE_Ticket_Number"]
+    else:
+      logging.warning("Could not retrieve configuration from battery API (error %i)!" % response.status_code)
 
   def update_data(self):
-    response = requests.get('http://%s/api/v1/status' % self.__battery_ip)
-    if response.status_code == 200:
-      self.__current_data = BatteryData(json.loads(response.text), last_data=self.__current_data)
-      self.__last_valid_data = self.__current_data
-    else:
+    try:
+      response = requests.get('http://%s/api/v1/status' % self.__battery_ip)
+      if response.status_code == 200:
+        self.__current_data = BatteryData(json.loads(response.text), last_data=self.__current_data)
+        self.__last_valid_data = self.__current_data
+      else:
+        logging.warning("Could not update data, request to %s failed with error %i!" % response.status_code)
+        self.__current_data = None
+    except Exception:
+      logging.warning("Could not update data, request to %s caused an exception!")
       self.__current_data = None
 
   def get_current_data(self):
@@ -133,3 +149,6 @@ class Battery():
 
   def get_last_valid_data(self):
     return (self.__current_data if self.__current_data else self.__last_valid_data)
+
+  def get_battery_id(self):
+    return self.__battery_id
