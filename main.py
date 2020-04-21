@@ -4,7 +4,7 @@ import signal
 import time
 import sys
 
-from battery import Battery
+from data.battery import Battery
 import config
 
 def cleanup():
