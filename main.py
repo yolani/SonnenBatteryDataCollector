@@ -66,7 +66,12 @@ if __name__ == "__main__":
                               data.get_battery_charge_ws(), data.get_battery_discharge_ws()))
 
         db_conn.commit()
-      
+      else:
+        try:
+          db_conn = psycopg2.connect("dbname='%s' user='%s' host='%s' password='%s'" % (config.DB_NAME, config.DB_USER, config.DB_HOST, config.DB_PWD))
+          logging.info("Successfully connected to PostgreSQL database %s@%s!" % (config.DB_NAME, config.DB_HOST))
+        except:
+          logging.warning("Unable to connect to the database")
       if csv_fp:
         csv_fp.write("%s, %s,%i,%i,%i,%i,%i,%i,%i,%f,%f,%f,%f,%f,%f\n" % 
                               (sonnen_batterie.get_battery_id(), data.get_timestamp(),            data.get_production_w(),        data.get_consumption_w(), 
