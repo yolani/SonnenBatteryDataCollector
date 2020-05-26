@@ -138,10 +138,11 @@ class Battery():
         self.__current_data = BatteryData(json.loads(response.text), last_data=self.__current_data)
         self.__last_valid_data = self.__current_data
       else:
-        logging.warning("Could not update data, request to %s failed with error %i!" % response.status_code)
+        logging.error("Could not update data, request to %s failed with error %i!" % response.status_code)
         self.__current_data = None
-    except Exception:
-      logging.warning("Could not update data, request to %s caused an exception!")
+    except Exception as ex:
+      logging.error("Could not update data, request to %s caused an exception!" % self.__battery_ip)
+      logging.error(str(ex))
       self.__current_data = None
 
   def get_current_data(self):
